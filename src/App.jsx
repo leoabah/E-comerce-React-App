@@ -1,9 +1,13 @@
+import AppRouter from "./routes/AppRouter"
+import Header from "./components/Header/Header"
+
 
 function App() {
 
   return (
     <>
-    <h1>Libreria Cosmica</h1>    
+    <Header/> 
+    <AppRouter /> 
     </>
   )
 }
