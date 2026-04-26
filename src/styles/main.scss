@@ -43,10 +43,11 @@ h1,h2,h3 {
   background-color:transparent;
   width:5.5rem ;
   font-size: 20px;
-  font-weight:bolder ;
-
+  font-weight:bolder;
 }
-
+ .nav-bar a:hover{
+  background-color: #4a599e8a;
+ }
 .logo{
   display: flex;
   align-items:center;
