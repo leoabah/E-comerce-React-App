@@ -20,12 +20,11 @@ const Header = () => {
             <Link to="/nosotros">Nosotros</Link>
             </div>
             <div className='search'>
-              <input className='inpHead'  type='text' placeholder='busxar prodcuto...'/>
+              <input className='inpHead'  type='text' placeholder='buscar producto...'/>
               <button className='searchBtn'><FaSearch/></button>
             </div>
-              <button className='CartBtn'><FaShoppingCart/></button>
-              <button className='inciar-btn'>Iniciar</button>
-              <button className='registrarse-btn'>Registrarse</button>
+              <button className='CartBtn'><FaShoppingCart style={{ width: 25, height:25 }} /></button>
+              <button className='signin-btn'>Registrarse</button>
 
               
         </nav>
