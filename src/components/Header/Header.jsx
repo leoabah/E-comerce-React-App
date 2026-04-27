@@ -20,7 +20,7 @@ const Header = () => {
             <Link to="/nosotros">Nosotros</Link>
             </div>
             <div className='search'>
-              <input className='inpHead'  type='text' placeholder='busxar prodcuto...'/>
+              <input className='inpHead'  type='text' placeholder='buscar producto...'/>
               <button className='searchBtn'><FaSearch/></button>
             </div>
               <button className='cartWrapper'><FaShoppingCart/></button>
