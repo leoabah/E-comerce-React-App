@@ -23,7 +23,7 @@ const Header = () => {
               <input className='inpHead'  type='text' placeholder='busxar prodcuto...'/>
               <button className='searchBtn'><FaSearch/></button>
             </div>
-              <button className='CartBtn'><FaShoppingCart/></button>
+              <button className='cartWrapper'><FaShoppingCart/></button>
               <button className='inciar-btn'>Iniciar</button>
               <button className='registrarse-btn'>Registrarse</button>
 
