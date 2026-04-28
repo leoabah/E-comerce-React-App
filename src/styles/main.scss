@@ -69,7 +69,8 @@ h1,h2,h3 {
 }
 .search input{
   align-items: center;
-  height: 2.2rem;
+  height: 2.4rem;
+  width: 17rem;
   padding: 0.6rem 0.2rem;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
@@ -81,6 +82,7 @@ h1,h2,h3 {
   border-top-right-radius:12px;
   border-bottom-right-radius:12px;
   padding: 6px;
+  width: 3rem;
   background-color: #fae7d3;
   
 }
@@ -88,9 +90,9 @@ h1,h2,h3 {
   background-color: #e5c38e;
 }
 
-.CartBtn{
+.cartWrapper{
   background-color: transparent;
-  color: #fdfbf7;
+  color: #fdfaf7;
   padding: 5px;
   border: none;
 }
@@ -98,17 +100,19 @@ h1,h2,h3 {
   color: #fae7d3;
 }
 
-.signin-btn{
+.registrase-bnt{
   background-color: #e5c38e;
-  padding: 10px;
+  padding: 20px;
   color: #121212;
   font-size: 13px;
   font-weight:bolder ;
   border-radius: 10px;
   border: transparent;
+
 }
 
 
 button {
   cursor: pointer;
+
 }
