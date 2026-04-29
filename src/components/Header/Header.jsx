@@ -24,8 +24,10 @@ const Header = () => {
               <button className='searchBtn'><FaSearch/></button>
             </div>
               <button className='cartWrapper'><FaShoppingCart/></button>
-              <button className='inciar-btn'>Iniciar</button>
-              <button className='registrarse-btn'>Registrarse</button>
+              <Link to="/iniciar" className='inciar-btn'>Iniciar</Link>
+              <Link to="/registrase" className='registrarse-btn'>
+                Registrarse
+              </Link>
 
               
         </nav>

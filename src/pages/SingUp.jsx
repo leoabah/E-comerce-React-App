@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import { Link } from "react-router-dom"
-import { auth } from '../firebase/config'
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'  
+import { auth } from '../firebaseConfig'
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth'  
 
 const SingUp = () => {
+  const provider = new GoogleAuthProvider()
 
-   const [formData,setformData]= useState({
+   const [formData,setFormData]= useState({
     fullName: "" ,
     email:"",
     password:""
@@ -15,7 +16,7 @@ const SingUp = () => {
    const [success, setSuccess]=useState(false)
 
    const handleChange = (e) =>{
-    setformData({
+    setFormData({
       ...formData,[e.target.name]:e.target.value
     });
    };
@@ -41,7 +42,7 @@ const SingUp = () => {
       
       console.log("Usuario registrado con exito:", user);
       setSuccess(true);
-      setformData({ fullName:"", email:"", password:"" });
+      setFormData({ fullName:"", email:"", password:"" });
       
       } catch(firebaseError){
         console.error("Error al registrar usuario", firebaseError.code, firebaseError.message);
@@ -49,6 +50,21 @@ const SingUp = () => {
       }
      
    };
+
+   const handleGoogleSignUp = async () => {
+    setError(null)
+    setSuccess(false)
+
+    try {
+      const result = await signInWithPopup(auth, provider)
+      console.log("Usuario registrado con Google:", result.user)
+      setSuccess(true)
+      setFormData({ fullName: "", email: "", password: "" })
+    } catch (firebaseError) {
+      console.error("Error al registrar usuario con Google", firebaseError.code, firebaseError.message)
+      setError(firebaseError.message)
+    }
+   }
    
   return (
     <div>
@@ -87,12 +103,13 @@ const SingUp = () => {
              required
              />
         </div>
-        <button type='sumbmit'>Crear cuenta</button>      
+        <button type='submit'>Crear cuenta</button>
       </form>
-      {success &&  <p style={{ color:"greed"}}>!Registo exitoso! Ya podes  Iniciar </p>}
-      {error && <p tsyle={{color:"red"}}>Error:{error}</p>}
+      <button type='button' onClick={handleGoogleSignUp}>Registrarse con Google</button>
+      {success &&  <p style={{ color:"green"}}>Registro exitoso! Ya podes iniciar sesion</p>}
+      {error && <p style={{color:"red"}}>Error: {error}</p>}
        <p>
-        ¿Ya tienes cuenta? <Link to="/loggIn">Iniciar Sesion</Link>
+        ¿Ya tienes cuenta? <Link to="/iniciar">Iniciar Sesion</Link>
        </p>
     </div>
   )

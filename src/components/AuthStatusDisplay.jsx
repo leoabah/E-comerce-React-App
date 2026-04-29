@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
-import { auth } from '../firebase/config'
+import { auth } from '../firebaseConfig'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { FaUserCircle } from 'react-icons/fa'
 
