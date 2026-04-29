@@ -12,7 +12,6 @@ const firebaseConfig = {
   measurementId: "G-ZHWKGR8H5Q"
 };
 
-// Verificar si Firebase ya fue inicializado
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
 export const auth = getAuth(app);

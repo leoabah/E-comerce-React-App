@@ -1,10 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FaSearch , FaShoppingCart } from 'react-icons/fa'
-import logoHeader from "@/assets/logo.png" 
-
+import { FaSearch, FaShoppingCart, FaUserCircle } from 'react-icons/fa'
+import { signOut } from 'firebase/auth'
+import { auth } from '../../firebaseConfig'
+import { useAuth } from '../../context/AuthContext'
+import logoHeader from "@/assets/logo.png"
 
 const Header = () => {
+  const { user } = useAuth()
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth)
+    } catch (error) {
+      console.error("Error al cerrar sesion", error.message)
+    }
+  }
+
+  const firstName = user?.displayName?.split(" ")[0] || user?.email?.split("@")[0] || "Usuario"
+
   return (
     <header className='header'>
         <nav className='nav-bar'>
@@ -23,13 +37,26 @@ const Header = () => {
               <input className='inpHead'  type='text' placeholder='buscar producto...'/>
               <button className='searchBtn'><FaSearch/></button>
             </div>
-              <button className='cartWrapper'><FaShoppingCart/></button>
-              <Link to="/iniciar" className='inciar-btn'>Iniciar</Link>
-              <Link to="/registrase" className='registrarse-btn'>
-                Registrarse
-              </Link>
-
+              <button className='cartWrapper'><FaShoppingCart style={{width:30, height:30 }}/></button>
               
+              {user ? (
+                <>
+                  <Link to="/perfil" className='perfil-btn' style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                    <FaUserCircle size={24} />
+                    {firstName}
+                  </Link>
+                  <button onClick={handleLogout} className='registrarse-btn'>
+                    Cerrar
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/iniciar" className='inciar-btn'>Iniciar</Link>
+                  <Link to="/registrase" className='registrarse-btn'>
+                    Registrarse
+                  </Link>
+                </>
+              )}
         </nav>
     </header>
   )

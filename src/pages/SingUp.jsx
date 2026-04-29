@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { auth } from '../firebaseConfig'
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth'  
 
 const SingUp = () => {
+  const navigate = useNavigate()
   const provider = new GoogleAuthProvider()
 
    const [formData,setFormData]= useState({
@@ -14,6 +15,39 @@ const SingUp = () => {
 
    const [error, setError]= useState(null)
    const [success, setSuccess]=useState(false)
+
+   const validations = {
+    fullName: {
+      regex: /^[a-zA-Z\s]+$/,
+      message: "El nombre solo puede contener letras y espacios"
+    },
+    email: {
+      regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      message: "Ingresa un email válido"
+    },
+    password: {
+      regex: /^.{6,}$/,
+      message: "La contraseña debe tener al menos 6 caracteres"
+    }
+   }
+
+   const validateForm = () => {
+    const fields = Object.keys(validations)
+    let isValid = true
+    
+    fields.forEach(field => {
+      const value = formData[field]
+      const validation = validations[field]
+      
+      if (!validation.regex.test(value)) {
+        setError(validation.message)
+        isValid = false
+        return
+      }
+    })
+    
+    return isValid
+   }
 
    const handleChange = (e) =>{
     setFormData({
@@ -26,6 +60,10 @@ const SingUp = () => {
      setError(null);
      setSuccess(false);
 
+     if (!validateForm()) {
+       return
+     }
+
      try{
       const userCredentiale = await createUserWithEmailAndPassword(
         auth,
@@ -35,18 +73,18 @@ const SingUp = () => {
 
       const user= userCredentiale.user;
 
-       await updateProfile(user , {
-        displayName:formData.fullName
-       });
+       await updateProfile(user, {
+        displayName: formData.fullName
+      })
 
-      
-      console.log("Usuario registrado con exito:", user);
-      setSuccess(true);
-      setFormData({ fullName:"", email:"", password:"" });
+      console.log("Usuario registrado con exito:", user)
+      setSuccess(true)
+      setFormData({ fullName:"", email:"", password:"" })
+      navigate('/')
       
       } catch(firebaseError){
-        console.error("Error al registrar usuario", firebaseError.code, firebaseError.message);
-        setError(firebaseError.message);
+        console.error("Error al registrar usuario", firebaseError.code, firebaseError.message)
+        setError(firebaseError.message)
       }
      
    };
@@ -60,6 +98,7 @@ const SingUp = () => {
       console.log("Usuario registrado con Google:", result.user)
       setSuccess(true)
       setFormData({ fullName: "", email: "", password: "" })
+      navigate('/')
     } catch (firebaseError) {
       console.error("Error al registrar usuario con Google", firebaseError.code, firebaseError.message)
       setError(firebaseError.message)
