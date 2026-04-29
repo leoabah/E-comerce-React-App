@@ -111,7 +111,7 @@ const LoggIn = () => {
         <button type="submit">Iniciar Sesion</button>
       </form>
       <button type="button" onClick={handleGoogleLogin}>
-        Iniciar con Google
+        Iniciar con Google<FcGoogle size={20} style={{ marginLeft: '8px' }} />
       </button>
       {success && <p style={{ color: 'green' }}>Inicio exitoso</p>}
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}

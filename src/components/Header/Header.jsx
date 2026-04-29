@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { FaSearch, FaShoppingCart, FaUserCircle } from 'react-icons/fa'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../firebaseConfig'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../hooks/useAuth'
 import logoHeader from "@/assets/logo.png"
 
 const Header = () => {
@@ -27,11 +27,11 @@ const Header = () => {
                 <h3>Libreria<br/>Cosmica</h3>
             </div>
             <br/>
-            <div className='linkSection'>
-            <Link to="/">Home</Link>
-            <Link to="/alta">Alta</Link>
-            <Link to="/contacto">Contacto</Link>
-            <Link to="/nosotros">Nosotros</Link>
+            <div className='div-links'>
+                 <Link to="/" className='link-nav' >Home</Link>
+                 <Link to="/alta" className='link-nav' >Alta</Link>
+                 <Link to="/contacto" className='link-nav' >Contacto</Link>
+                 <Link to="/nosotros" className='link-nav' >Nosotros</Link>
             </div>
             <div className='search'>
               <input className='inpHead'  type='text' placeholder='buscar producto...'/>
@@ -40,7 +40,7 @@ const Header = () => {
               <button className='cartWrapper'><FaShoppingCart style={{width:30, height:30 }}/></button>
               
               {user ? (
-                <>
+                <div className='auth-links'>
                   <Link to="/perfil" className='perfil-btn' style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
                     <FaUserCircle size={24} />
                     {firstName}
@@ -48,14 +48,14 @@ const Header = () => {
                   <button onClick={handleLogout} className='registrarse-btn'>
                     Cerrar
                   </button>
-                </>
+                </div>
               ) : (
-                <>
-                  <Link to="/iniciar" className='inciar-btn'>Iniciar</Link>
+                <div className='auth-links'>
+                  <Link to="/iniciar" className='iniciar-btn'>Iniciar</Link>
                   <Link to="/registrase" className='registrarse-btn'>
                     Registrarse
                   </Link>
-                </>
+                </div>
               )}
         </nav>
     </header>

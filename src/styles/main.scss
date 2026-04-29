@@ -33,7 +33,7 @@ h1,h2,h3 {
   width: 100%;
 }
 
-.nav-bar a{
+.link-nav{
   display:inline-flex;
   justify-content: space-around;
   margin: 0 2px;
@@ -44,10 +44,11 @@ h1,h2,h3 {
   width:5.5rem ;
   font-size: 20px;
   font-weight:bolder;
-}
- .nav-bar a:hover{
+  &:hover{
   background-color: #4a599e8a;
- }
+  color: #fae7d3; }
+  }
+ 
 .logo{
   display: flex;
   align-items:center;
@@ -100,15 +101,28 @@ h1,h2,h3 {
   color: #fae7d3;
 }
 
-.registrase-bnt{
-  background-color: #e5c38e;
-  padding: 20px;
-  color: #121212;
-  font-size: 13px;
-  font-weight:bolder ;
+.auth-links{
+  display: flex;
+  gap: 10px;
+  text-align: center;
+}
+
+
+.registrarse-btn,.iniciar-btn,.perfil-btn{
+  background-color: #1b1e3d;
+  padding: 10px;
+  color: #fae7d3;
+  font-size: 23px;
+  font-weight:bolder;
+  font-style: italic;
   border-radius: 10px;
   border: transparent;
+  text-decoration: none;
 
+   &:hover {
+    background-color: #fae7d3;
+    color: #1b1e3d;
+   }
 }
 
 
